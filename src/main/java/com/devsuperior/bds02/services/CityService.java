@@ -22,5 +22,12 @@ public class CityService {
         List<City> list = repository.findAll(Sort.by("name"));
         //Transforma a lista de City em uma lista de CityDTO
         return list.stream().map(x -> new CityDTO(x)).toList();
-    }    
+    }
+    
+    public CityDTO insert(CityDTO dto) {
+        City entity = new City();
+        entity.setName(dto.getName());
+        entity = repository.save(entity);
+        return new CityDTO(entity);
+    }
 }
