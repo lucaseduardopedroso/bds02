@@ -1,6 +1,8 @@
 package com.devsuperior.bds02.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -31,7 +33,8 @@ public class EventService {
     public List<EventDTO> findAll(){
         List<Event> list = repository.findAll();
         //Transforma a lista de Event em uma lista de EventDTO
-        return list.stream().map(x -> new EventDTO(x)).toList();
+        Stream<EventDTO> stream = list.stream().map(EventDTO::new);
+        return stream.collect(Collectors.toList());
     }
     
     public EventDTO insert(EventDTO dto) {

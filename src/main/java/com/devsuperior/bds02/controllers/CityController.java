@@ -41,7 +41,7 @@ public class CityController {
         return ResponseEntity.created(uri).body(dto);
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();

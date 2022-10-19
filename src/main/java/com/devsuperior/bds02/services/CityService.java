@@ -1,6 +1,8 @@
 package com.devsuperior.bds02.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,7 +27,8 @@ public class CityService {
     public List<CityDTO> findAll(){
         List<City> list = repository.findAll(Sort.by("name"));
         //Transforma a lista de City em uma lista de CityDTO
-        return list.stream().map(x -> new CityDTO(x)).toList();
+        Stream<CityDTO> stream = list.stream().map(CityDTO::new);
+        return stream.collect(Collectors.toList());
     }
     
     public CityDTO insert(CityDTO dto) {
